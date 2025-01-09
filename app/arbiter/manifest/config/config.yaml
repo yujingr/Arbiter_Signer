@@ -4,12 +4,14 @@ chain:
 
 # Arbiter
 arbiter:
-  listener: true,
-  signer: true,
+  listener: true
+  signer: true
   network: "mainnet"
   escStartHeight: 28437808
   escArbiterContractAddress: "0xA10b92006743Ef3B12077da67e465963743b03D3"
   escArbiterManagerContractAddress: "0x9963b5214434776D043A4e98Bc7f33321F6aaCfc"
-  escArbiterAddress: "0x0262aB0ED65373cC855C34529fDdeAa0e686D913"
-  dataPath: "./app/arbiter/data"
-  keyFilePath: "./app/arbiter/data/keys/"
+  dataPath: "./data"
+  keyFilePath: "./key"
+  escArbiterAddress: ""
+  escPrivateKey: ""
+  btcPrivateKey: ""
