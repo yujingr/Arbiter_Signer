@@ -61,9 +61,9 @@ func getDefaultConfig() ConfigFile {
 		execPath = "."
 	}
 	execDir := filepath.Dir(execPath)
-	
-	cfg.Arbiter.DataPath = filepath.Join(execDir, "data")
-	cfg.Arbiter.KeyFilePath = filepath.Join(execDir, "key")
+
+	cfg.Arbiter.DataPath = filepath.Join(execDir, "app", "arbiter", "data")
+	cfg.Arbiter.KeyFilePath = filepath.Join(execDir, "app", "arbiter", "data", "keys")
 	cfg.Arbiter.EscArbiterAddress = ""
 	cfg.Arbiter.EscPrivateKey = ""
 	cfg.Arbiter.BtcPrivateKey = ""
@@ -72,7 +72,17 @@ func getDefaultConfig() ConfigFile {
 }
 
 func setupConfig() error {
-	configPath := "config.yaml"
+	// Get executable directory
+	execPath, err := os.Executable()
+	if err != nil {
+		execPath = "."
+	}
+	execDir := filepath.Dir(execPath)
+	
+	// Use absolute path for config
+	configPath := filepath.Join(execDir, "config.yaml")
+	
+	fmt.Printf("Looking for config file at: %s\n", configPath)
 	
 	// Check if config already exists and warn user
 	if _, err := os.Stat(configPath); err == nil {

@@ -1,115 +1,82 @@
-Arbiter Signer
-=============
+# Arbiter Signer (Community Edition)
+
 [![Go Report Card](https://goreportcard.com/badge/github.com/BeL2Labs/Arbiter_Signer)](https://goreportcard.com/report/github.com/BeL2Labs/Arbiter_Signer)
 [![Build Status](https://github.com/BeL2Labs/Arbiter_Signer/workflows/Build%20and%20Test/badge.svg)](https://github.com/BeL2Labs/Arbiter_Signer/actions)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](http://copyfree.org)
-[![GoDoc](https://img.shields.io/badge/godoc-reference-blue.svg)](https://pkg.go.dev/github.com/BeL2Labs/Arbiter_Signer)
 
 ## Introduction
 
-The Arbiter Signer is used to provide signing services for the bel2 loan arbiter.
+This is a community-maintained fork of the official [BeL2 Arbiter Signer](https://github.com/BeL2Labs/Arbiter_Signer) that simplifies the setup process for Elastos/BeL2 community members. It provides pre-built executables for various operating systems, allowing users to quickly test and participate in the BeL2 ecosystem.
+
+## ⚠️ Risk Disclosure
+
+Please read the following risk disclosures carefully before running an arbiter node:
+
+1. **Uptime Requirements**:
+
+   - Arbiters must maintain high availability (24/7 uptime)
+   - If selected for arbitration while inactive, you risk losing part or all of your staked assets
+   - The exact time window for response is to be determined, but is likely measured in hours
+
+2. **Recommended Setup**:
+
+   - A cloud server with 24/7 uptime is strongly recommended
+   - Implement robust monitoring systems to alert you of any downtime
+   - Have backup systems and procedures in place
+
+3. **Community Edition Notice**:
+   - This is a community-maintained version focused on ease of setup
+   - While we strive for reliability, use at your own discretion
+   - For production deployments, consider using the [official repository](https://github.com/BeL2Labs/Arbiter_Signer)
+
+## Quick Start
+
+1. Download the latest release for your operating system from the [Releases](https://github.com/yujingr/Arbiter_Signer/releases) section
+2. Run the executable to start the interactive setup process
+3. Follow the prompts to configure your arbiter node
+
+## Demo
+
+Watch our setup demonstration video to see how to configure and run your arbiter node:
+
+[![Arbiter Signer Setup Demo](https://img.youtube.com/vi/VYMq8LSK0iI/0.jpg)](https://youtu.be/VYMq8LSK0iI)
 
 ## Requirements
 
-[Go](http://golang.org) 1.20 or newer.
+- A stable internet connection
+- 24/7 system availability
+- Monitoring system (recommended)
+- Sufficient stake as required by the BeL2 protocol
 
-## Build and run
-### 1. build arbiter
+## Configuration
 
-use **main** branch to build:
+The setup process will guide you through creating a `config.yaml` file with the following key parameters, there are some default values, you can change them as you need:
 
-```shell
-$ git clone git@github.com:BeL2Labs/Arbiter_Signer.git
+### Chain API
 
-$ cd Arbiter_Signer
+1. **esc**: ESC chain API endpoint (default: "https://api.elastos.io/esc")
 
-$ go mod tidy
+### Arbiter Settings
 
-$ make
-```
+1. **listener**: Controls event monitoring from the ESC arbiter contract (default: true)
+2. **signer**: Controls BTC transaction signing and ESC contract submission (default: true)
+3. **network**: Specifies "mainnet" or "testnet" for BTC address generation (default: "mainnet")
+4. **escStartHeight**: Starting block height for event monitoring (default: 28437808)
+5. **escArbiterContractAddress**: Current arbiter contract address (default: "0xA10b92006743Ef3B12077da67e465963743b03D3")
+6. **escArbiterManagerContractAddress**: Arbiter manager contract address (default: "0x9963b5214434776D043A4e98Bc7f33321F6aaCfc")
+7. **dataPath**: Path for event file storage (default: "./app/arbiter/data")
+8. **keyFilePath**: Path for BTC and ESC keystores (default: "./app/arbiter/data/keys/")
+9. **escArbiterAddress**: Your arbiter wallet address (required)
+10. **escPrivateKey**: Your ESC private key (required)
+11. **btcPrivateKey**: Your BTC private key (required)
 
-### 2. prepare config file
+## Advanced Setup
 
-1. **listener**: listen to esc arbiter contract event
+For production deployments or advanced configurations, please refer to:
 
-2. **signer**: sign request_arbitration_btc_tx and submit to esc arbiter contract 
-
-3. **network**: use **mainnet** or **testnet** for btc address generation
-
-4. **escStartHeigh**t: listen from this height to get esc arbiter contract event
-
-5. **escArbiterContractAddress**: arbiter contract address, if arbiter contract address changed, need to update it
-
-6. **escArbiterAddress**: arbiter wallet address, not operator address
-
-7. **dataPath**: defines the path to record event file
-
-8. **keyFilePath**: defines the path of arbiter BTC keystore and ESC keystore
-
-
-   ***config.yaml example***：
-
-   ```yaml
-   # Chain api
-   chain:
-     esc: "https://api.elastos.io/esc"
-
-   # Arbiter
-   arbiter:
-     listener: true,
-     signer: true,
-     network: "mainnet"
-     escStartHeight: 21205821
-     escArbiterContractAddress: "0xD206be45b53Fa5C2065049c7a70B1aa1755a9475"
-     escArbiterManagerContractAddress: "0x54eE4fc8951A936b6AA02079B76c497c0471c52A"
-     escArbiterAddress: "0x0262aB0ED65373cC855C34529fDdeAa0e686D913"
-     dataPath: "~/loan_arbiter/data"
-     keyFilePath: "~/loan_arbiter/keys"
-   ```
-
-
-
-### 3. prepare keystore to keyFilePath
-
-1. create **btcKey.json** **escKey.json** and put it into **keyFilePath**
-btcKey is used to sign request_arbitration_btc_tx
-escKey is used to submit arbitration signature to esc arbiter contract, gas fee(esc ELA) is needed
- 
-2. keysotre file need to set hex encoded private key
-
-   btcKey.json
-      ```json
-      {
-          "privKey": "[HEX_PRIV_KEY]"
-      }
-      ```
-   escKey.json
-      ```json
-      {
-          "privKey": "[HEX_PRIV_KEY]"
-      }
-      ```
-
-### 4. run arbiter
-
-run arbiter with go file
-```shell
-go run app/arbiter/main.go
-```
-
-run arbiter with default manifest file
-```shell
-./arbiter
-```
-
-run arbiter with custom manifest file
-```shell
-./arbiter --gf.gcfg.file=config.yaml
-```
-
-## Automated Deployment
-The automated deployment process can be referenced in the documentation: 
-[deploy_loan_arbiter.md](https://github.com/BeL2Labs/Arbiter_Signer/blob/main/docs/deploy_loan_arbiter.md)
+- [Official Repository](https://github.com/BeL2Labs/Arbiter_Signer)
+- [Deployment Guide](https://github.com/BeL2Labs/Arbiter_Signer/blob/main/docs/deploy_loan_arbiter.md)
 
 ## License
-arbiter signer is licensed under the [copyfree](http://copyfree.org)  MIT License.
+
+This project is licensed under the [copyfree](http://copyfree.org) MIT License.
