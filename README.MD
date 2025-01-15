@@ -33,6 +33,14 @@ Please read the following risk disclosures carefully before running an arbiter n
 
 1. Download the latest release for your operating system from the [Releases](https://github.com/yujingr/Arbiter_Signer/releases) section
 2. Run the executable to start the interactive setup process
+   - **macOS users**: Due to Apple's security measures, you'll need to:
+     1. Right-click (or Control-click) the app
+     2. Select "Open" from the context menu
+     3. Click "Open" in the security dialog that appears
+     4. This only needs to be done once
+   - **Linux users**: After downloading, you can run directly:
+     1. Open terminal in the download directory
+     2. Run the application: `./arbiter-signer`
 3. Follow the prompts to configure your arbiter node
 
 ## Demo
