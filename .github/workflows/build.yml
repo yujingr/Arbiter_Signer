@@ -46,6 +46,10 @@ jobs:
         GOARCH: ${{ matrix.goarch }}
       run: go build -o ${{ matrix.output_name }} ./app/arbiter
 
+    - name: Make binary executable
+      if: matrix.os != 'windows-latest'
+      run: chmod +x ${{ matrix.output_name }}
+
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
