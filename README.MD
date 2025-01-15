@@ -1,7 +1,7 @@
 # Arbiter Signer (Community Edition)
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/BeL2Labs/Arbiter_Signer)](https://goreportcard.com/report/github.com/BeL2Labs/Arbiter_Signer)
-[![Build Status](https://github.com/BeL2Labs/Arbiter_Signer/workflows/Build%20and%20Test/badge.svg)](https://github.com/BeL2Labs/Arbiter_Signer/actions)
+[![Go Report Card](https://goreportcard.com/badge/github.com/yujingr/Arbiter_Signer)](https://goreportcard.com/report/github.com/yujingr/Arbiter_Signer)
+[![Build Status](https://github.com/yujingr/Arbiter_Signer/workflows/Build%20and%20Test/badge.svg)](https://github.com/yujingr/Arbiter_Signer/actions)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](http://copyfree.org)
 
 ## Introduction
