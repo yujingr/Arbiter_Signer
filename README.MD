@@ -1,4 +1,19 @@
-# Arbiter Signer (Community Edition)
+# Arbiter Signer (Community Edition) [DEPRECATED]
+
+⚠️ **This repository is outdated and no longer maintained**
+
+The new one-click setup GUI version is now available at: [BeL2ArbiterGUI](https://github.com/yujingr/BeL2ArbiterGUI)
+
+## Why the change?
+
+This repository has been deprecated in favor of the new GUI version to:
+
+- Provide a more user-friendly setup experience
+- Better support future code updates from the original BeL2 repository
+- Offer improved cross-platform compatibility
+- Simplify the maintenance and update process
+
+Please visit [BeL2ArbiterGUI](https://github.com/yujingr/BeL2ArbiterGUI) for the latest version with one-click setup functionality.
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/yujingr/Arbiter_Signer)](https://goreportcard.com/report/github.com/yujingr/Arbiter_Signer)
 [![Build Status](https://github.com/yujingr/Arbiter_Signer/workflows/Build%20and%20Test/badge.svg)](https://github.com/yujingr/Arbiter_Signer/actions)
